@@ -2,26 +2,59 @@
 package th.go.rd.atm.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
+import th.go.rd.atm.model.Customer;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import th.go.rd.atm.model.Customer;
+import th.go.rd.atm.service.CustomerService;
 
-import java.util.ArrayList;
 @Controller
+@RequestMapping("/customer")
+
 public class CustomerController {
-    @RequestMapping("/customer")
+    private CustomerService customerService;
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
+    @GetMapping
     public String getCustomerPage(Model model) {
-        ArrayList<Customer> customers = new ArrayList<>();
-
-        customers.add("Peter");
-
-        customers.add("Nancy");
-
-        customers.add("Rick");
-
-
-        model.addAttribute("allCustomers", customers);
+        model.addAttribute("allCustomers", customerService.getCustomers());
         return "customer";
     }
+
+    @PostMapping
+    public String registerCustomer(@ModelAttribute Customer customer, Model model) {
+        customerService.createCustomer(customer);
+        model.addAttribute("allCustomers", customerService.getCustomers());
+        return "redirect:customer";
+    }
+
+
+
+
+
+/*
+    ArrayList<Customer> customers = new ArrayList<>();
+    @GetMapping("/customer")
+    public String getCustomerPage(Model model) {
+
+        model.addAttribute("allCustomers", customers);
+        return "customer";  //customer.html
+    }
+
+    @PostMapping("customer")
+    public String registerCustomer(@ModelAttribute Customer customer, Model model) {
+        customers.add(customer);
+        model.addAttribute("allCustomers", customers);
+        return "redirect:customer";
+    }
+
+
+ */
 }
 
 

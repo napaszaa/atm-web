@@ -13,7 +13,7 @@ public class HomeController {
 
     public String getHomePage(Model model) {
 
-        model.addAttribute("greeting", "Sawaddee");
+        model.addAttribute("greeting", "Sawaddeexxxxxx");
 
         // return home.html
 

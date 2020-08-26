@@ -1,5 +1,5 @@
 
-package th.go.rd.atm.controller;
+package th.go.rd.atm.model;
 
 
 public class Customer {
@@ -8,10 +8,10 @@ public class Customer {
 
     private String name;
 
-    private int pin;
+    private String pin;
 
 
-    public Customer(int id, String name, int pin) {
+    public Customer(int id, String name, String pin) {
 
         this.id = id;
 
@@ -50,14 +50,14 @@ public class Customer {
     }
 
 
-    public int getPin() {
+    public String getPin() {
 
         return pin;
 
     }
 
 
-    public void setPin(int pin) {
+    public void setPin(String pin) {
 
         this.pin = pin;
 
