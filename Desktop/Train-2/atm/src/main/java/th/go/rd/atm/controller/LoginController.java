@@ -12,7 +12,7 @@ import th.go.rd.atm.service.CustomerService;
 @RequestMapping("/login")
 public class LoginController {
   private CustomerService customerService;
-    public LoginController(CustomerService customerService) {
+    public LoginController(CustomerService customerService) {  //dependency injection
         this.customerService = customerService;
     }
 
@@ -25,8 +25,7 @@ public class LoginController {
     @PostMapping
     public String login(@ModelAttribute Customer customer, Model model) {
         // 1. เอา id กับ pin ไปเช็คกับข้อมูล customer ที่มีอยู่ ว่าตรงกันบ้างไหม
-        Customer matchingCustomer = customerService.checkPin(customer);
-
+        Customer matchingCustomer = customerService.checkPin(customer);   //matchingCustomer  เป็น object
 
         // 2. ถ้าตรง ส่งข้อมูล customer กลับไปแสดงผล (ไม่ส่ง pin ไปด้วย)
         if (matchingCustomer != null) {
@@ -42,7 +41,3 @@ public class LoginController {
     }
 
 }
-
-
-
-
